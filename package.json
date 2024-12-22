@@ -1,6 +1,6 @@
 {
   "name": "@typed/route",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "Type-safe routing for Effect",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
