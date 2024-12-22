@@ -29,6 +29,14 @@ yarn add @typed/route
 
 ```
 
+## See it in Action
+
+Here's some examples you can try out in your browser:
+
+- [StackBlitz](https://stackblitz.com/edit/vitejs-vite-wrjpac8t?file=src%2Fmain.ts,src%2Futils.ts,package.json&terminal=dev)
+
+Be sure to hover over the routes to see the inferred types, and open your console to see the printed outputs.
+
 ## Usage Guide
 
 ### Basic Route Creation
