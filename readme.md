@@ -1,6 +1,10 @@
 # @typed/route
 
-Type-safe, bi-directional routing with Effect's `Schema`.
+Type-safe, bi-directional routing with Effect's `Schema`. 
+
+The key benefit of `@typed/route` is type-safety through type-level parsing of strings utilizing TypeScript's string literal types. 
+When constructing Routes, it *knows* exactly what path syntax is being constructed and the types of the parsed parameters.
+When interpolating Routes, it *knows* exactly what path will be constructed.
 
 [![npm version](https://badge.fury.io/js/%40typed%2Froute.svg)](https://badge.fury.io/js/%40typed%2Froute)
 
