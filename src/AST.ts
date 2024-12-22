@@ -795,7 +795,7 @@ function simpleAstToMatcher(
     case 'Prefix': {
       const inner = simpleAstToMatcher(ensureSimpleAst(ast.param), ctx, isOptional, isMultiple)
       return (pathSegments, query) => {
-        if (pathSegments[0].startsWith(ast.prefix)) {
+        if (pathSegments[0]?.startsWith(ast.prefix)) {
           pathSegments[0] = pathSegments[0].slice(ast.prefix.length)
           return inner(pathSegments, query)
         } else {

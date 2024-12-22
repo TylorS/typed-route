@@ -258,4 +258,18 @@ describe('Route', () => {
       expected.map((r) => r.path),
     )
   })
+
+  describe('edge cases', () => {
+    describe('prefixing a param', () => {
+      const fooPrefixed = Route.param('fooId').prefix('foo-')
+
+      it('can be interpolated', () => {
+        deepEqual(fooPrefixed.interpolate({ fooId: '1' }), '/foo-1')
+      })
+
+      it('can be matched', () => {
+        deepEqual(fooPrefixed.match('/foo-1'), Option.some({ fooId: '1' }))
+      })
+    })
+  })
 })
