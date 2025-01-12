@@ -2,7 +2,8 @@
  * @since 5.0.0
  */
 
-import { SchemaAST, Schema } from 'effect'
+import * as Schema from 'effect/Schema'
+import * as SchemaAST from 'effect/SchemaAST'
 import * as P from './Path/index.js'
 import * as Option from 'effect/Option'
 
