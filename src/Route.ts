@@ -16,12 +16,15 @@ import type * as Types from 'effect/Types'
 import type { N, O, U } from 'ts-toolbelt'
 import * as AST from './AST.js'
 import * as Path from './Path/index.js'
+import { type Guard, GUARDABLE, Guardable } from '@typed/guard'
 
 export const RouteTypeId = Symbol.for('@typed/route/Route')
 
 export type RouteTypeId = typeof RouteTypeId
 
-export interface Route<P extends string, S extends Schema.Schema.All = never> extends Pipeable {
+export interface Route<P extends string, S extends Schema.Schema.All = Route.PathSchema<P>>
+  extends Guard<string, S['Type'], never, S['Context']>,
+    Pipeable {
   readonly [RouteTypeId]: Route.Variance<P, S>
 
   readonly routeAst: AST.AST
@@ -319,7 +322,10 @@ const variance_: Route.Variance<any, any> = {
   _S: (_) => _,
 }
 
-class RouteImpl<P extends string, S extends Schema.Schema.All> implements Route<P, S> {
+class RouteImpl<P extends string, S extends Schema.Schema.All>
+  extends Guardable<string, S['Type'], never, S['Context']>
+  implements Route<P, S>
+{
   readonly [RouteTypeId]: Route.Variance<P, S> = variance_
 
   readonly routeOptions: RouteOptions
@@ -328,6 +334,7 @@ class RouteImpl<P extends string, S extends Schema.Schema.All> implements Route<
     readonly routeAst: AST.AST,
     options?: Partial<RouteOptions>,
   ) {
+    super()
     this.pipe = this.pipe.bind(this)
     this.concat = this.concat.bind(this)
     this.routeOptions = { end: false, ...options }
@@ -398,6 +405,13 @@ class RouteImpl<P extends string, S extends Schema.Schema.All> implements Route<
 
   prefix<P2 extends string>(prefix: P2) {
     return make(new AST.Prefix(prefix, this.routeAst)) as any
+  }
+
+  [GUARDABLE] = (input: string) => {
+    return decode<Route<P, S>>(this, input).pipe(
+      Effect.asSome,
+      Effect.catchAll((_) => Effect.succeedNone),
+    )
   }
 }
 

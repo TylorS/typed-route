@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@typed/guard':
+        specifier: ^0.7.2
+        version: 0.7.2(effect@3.11.9)
       effect:
         specifier: ^3.11.9
         version: 3.11.9
@@ -326,6 +329,11 @@ packages:
     resolution: {integrity: sha512-+10CMg9vt1MoHj6x1pxyjPSMjHTIlqs8/tBztXvPAx24SKs9jwVnKqHJumlH/IzhaPUaj3T6T6wfZr8okdXaIg==}
     cpu: [x64]
     os: [win32]
+
+  '@typed/guard@0.7.2':
+    resolution: {integrity: sha512-MydpZpUD03oyh4OMVb3Nv6bKaLMnBC5++mDq7EMiE21B9xfI4X0qcz5dtX3gRSBZMlZx6HOO/YjE6TTiQvg2xg==}
+    peerDependencies:
+      effect: ^3.11.9
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -738,6 +746,10 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.29.1':
     optional: true
+
+  '@typed/guard@0.7.2(effect@3.11.9)':
+    dependencies:
+      effect: 3.11.9
 
   '@types/estree@1.0.6': {}
 

@@ -1,8 +1,8 @@
-import { Schema } from 'effect'
+import { Schema, Unify } from 'effect'
 import * as Route from './Route.js'
 import { deepEqual } from 'node:assert'
 import { Effect, Option } from 'effect'
-import { describe, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 describe('Route', () => {
   // Separator is necessary because prefixing a param with a literal will not create a new path segment by itself
@@ -270,6 +270,21 @@ describe('Route', () => {
       it('can be matched', () => {
         deepEqual(fooPrefixed.match('/foo-1'), Option.some({ fooId: '1' }))
       })
+    })
+  })
+
+  describe(`it implements @typed/guard's Guard interface`, async () => {
+    it('guards', () => {
+      const route = Route.literal('foo').concat(Route.integer('fooId'))
+
+      const test = Effect.gen(function* () {
+        const pass = yield* route('/foo/1').pipe(Effect.flatMap((x) => Effect.succeed(x)))
+        expect(pass).toEqual(Option.some({ fooId: 1 }))
+        const fail = yield* route('/foo/bar')
+        expect(fail).toEqual(Option.none())
+      })
+
+      return Effect.runPromise(test)
     })
   })
 })
