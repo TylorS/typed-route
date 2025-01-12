@@ -4,6 +4,7 @@
   },
   "linter": {
     "enabled": true,
+    "include": ["src/**/*.ts"],
     "rules": {
       "recommended": true,
       "suspicious": {
