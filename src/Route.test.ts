@@ -278,7 +278,7 @@ describe('Route', () => {
       const route = Route.literal('foo').concat(Route.integer('fooId'))
 
       const test = Effect.gen(function* () {
-        const pass = yield* route('/foo/1').pipe(Effect.flatMap((x) => Effect.succeed(x)))
+        const pass = yield* route('/foo/1')
         expect(pass).toEqual(Option.some({ fooId: 1 }))
         const fail = yield* route('/foo/bar')
         expect(fail).toEqual(Option.none())
